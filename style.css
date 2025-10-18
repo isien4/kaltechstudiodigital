@@ -1,0 +1,79 @@
+/* Transition générale */
+body {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Hero Section */
+.hero-section {
+  background: url('hero-bg.jpg') center/cover no-repeat;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+}
+
+/* Sections et textes par défaut */
+section {
+  color: #212529;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Cards */
+.card {
+  background-color: #fff;
+  color: #212529;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Boutons */
+.btn-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* Footer */
+footer {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Mode sombre global */
+body.dark-mode {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+body.dark-mode section {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+body.dark-mode .card {
+  background-color: #1f1f1f;
+  color: #f5f5f5;
+}
+
+body.dark-mode .navbar, body.dark-mode footer {
+  background-color: #1f1f1f !important;
+  color: #f5f5f5 !important;
+}
+
+body.dark-mode .btn-primary {
+  background-color: #0dcaf0;
+  border-color: #0dcaf0;
+}
+
+body.dark-mode .bg-light {
+  background-color: #1f1f1f !important; /* corrige toutes les sections bg-light */
+}
+
+body.dark-mode .text-dark {
+  color: #f5f5f5 !important;
+}
+
+body.dark-mode .text-light {
+  color: #f5f5f5 !important;
+}
