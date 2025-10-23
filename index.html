@@ -6,69 +6,434 @@
   <title>Kaltech Studio Digital</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Poppins', sans-serif; transition: background-color 0.3s, color 0.3s; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      background: #0a0a0a;
+      color: #fff;
+    }
+
+    /* Particles background */
+    #particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(0, 212, 255, 0.3);
+      animation: float 20s infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) translateX(0); }
+      25% { transform: translateY(-100px) translateX(50px); }
+      50% { transform: translateY(-50px) translateX(-50px); }
+      75% { transform: translateY(-150px) translateX(100px); }
+    }
 
     /* Navbar */
-    .navbar { padding: 1rem 2rem; }
-    .navbar-brand img { height: 50px; margin-right: 10px; }
-
-    /* HERO */
-    .hero {
-      background: linear-gradient(135deg, #000, #00d4ff);
-      color: white;
-      padding: 120px 0;
-      text-align: center;
+    .navbar {
+      padding: 1.5rem 2rem;
+      background: rgba(10, 10, 10, 0.95) !important;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+      transition: all 0.3s ease;
     }
-    .hero h1 { font-size: 3rem; font-weight: 700; }
-    .hero p { font-size: 1.2rem; opacity: 0.9; }
 
-    /* Section Titles */
-    .section-title {
+    .navbar.scrolled {
+      padding: 0.8rem 2rem;
+      box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+    }
+
+    .navbar-brand {
       font-weight: 700;
-      color: #00bcd4;
-      text-transform: uppercase;
-      margin-bottom: 20px;
+      font-size: 1.5rem;
+      background: linear-gradient(135deg, #00d4ff, #7b2ff7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-brand:hover {
+      transform: scale(1.05);
+    }
+
+    .navbar-brand img {
+      height: 50px;
+      margin-right: 10px;
+      filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5));
+      transition: all 0.3s ease;
+    }
+
+    .navbar-brand:hover img {
+      filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.8));
+      transform: rotate(360deg);
+    }
+
+    .nav-link {
+      color: #fff !important;
+      font-weight: 500;
+      margin: 0 1rem;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #00d4ff, #7b2ff7);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link:hover {
+      color: #00d4ff !important;
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(0, 212, 255, 0.1), transparent);
+      transform: translate(-50%, -50%);
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+      50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero h1 {
+      font-size: 5rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #00d4ff, #7b2ff7, #ff006e);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+      animation: gradientShift 3s ease infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 2rem;
+      animation: fadeInUp 1s ease-out 0.3s both;
+    }
+
+    .hero-btn {
+      padding: 1rem 3rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #00d4ff, #7b2ff7);
+      color: #fff;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      animation: fadeInUp 1s ease-out 0.6s both;
+    }
+
+    .hero-btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    .hero-btn:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .hero-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 212, 255, 0.4);
+    }
+
+    /* Section Styles */
+    section {
+      padding: 100px 0;
+      position: relative;
+    }
+
+    .section-title {
+      font-size: 3rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 3rem;
+      background: linear-gradient(135deg, #00d4ff, #7b2ff7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: fadeInUp 0.8s ease-out;
     }
 
     /* Cards */
-    .card {
-      border: none;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
-      border-radius: 15px;
+    .service-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      border-radius: 20px;
+      padding: 2.5rem;
+      transition: all 0.4s ease;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
     }
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+      transform: rotate(45deg);
+      transition: all 0.6s ease;
+    }
+
+    .service-card:hover::before {
+      left: 100%;
+    }
+
+    .service-card:hover {
+      transform: translateY(-15px) scale(1.02);
+      border-color: rgba(0, 212, 255, 0.6);
+      box-shadow: 0 20px 50px rgba(0, 212, 255, 0.3);
+      background: rgba(0, 212, 255, 0.08);
+    }
+
+    .service-card i {
+      font-size: 4rem;
+      background: linear-gradient(135deg, #00d4ff, #7b2ff7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+      transition: all 0.4s ease;
+    }
+
+    .service-card:hover i {
+      transform: rotateY(360deg) scale(1.2);
+    }
+
+    .service-card h5 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+
+    .service-card p {
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.6;
+    }
+
+    /* Portfolio Card */
+    .portfolio-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(0, 212, 255, 0.6);
+      box-shadow: 0 20px 50px rgba(0, 212, 255, 0.3);
+    }
+
+    .portfolio-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin-top: 1rem;
+      transition: all 0.4s ease;
+    }
+
+    .portfolio-card:hover img {
+      transform: scale(1.05);
+    }
+
+    /* About Section */
+    #about {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .lead {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.8);
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    /* Contact Section */
+    .contact-info {
+      font-size: 1.3rem;
+      margin: 1rem 0;
+      color: rgba(255, 255, 255, 0.9);
+      transition: all 0.3s ease;
+    }
+
+    .contact-info:hover {
+      color: #00d4ff;
+      transform: translateX(10px);
+    }
+
+    .contact-info i {
+      margin-right: 1rem;
+      color: #00d4ff;
+    }
+
+    .social-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(0, 212, 255, 0.1);
+      border: 2px solid #00d4ff;
+      color: #00d4ff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 0.5rem;
+      transition: all 0.3s ease;
+      font-size: 1.5rem;
+    }
+
+    .social-btn:hover {
+      background: #00d4ff;
+      color: #000;
+      transform: translateY(-5px) rotate(360deg);
+      box-shadow: 0 10px 30px rgba(0, 212, 255, 0.5);
     }
 
     /* Footer */
     footer {
-      background-color: #000;
-      color: white;
+      background: rgba(0, 0, 0, 0.8);
+      border-top: 1px solid rgba(0, 212, 255, 0.2);
       padding: 40px 0;
       text-align: center;
     }
 
-    /* Mode sombre / clair automatique */
-    body.dark-mode {
-      background-color: #121212;
-      color: #f5f5f5;
+    footer p {
+      margin: 0.5rem 0;
+      color: rgba(255, 255, 255, 0.7);
     }
-    body.dark-mode .bg-light { background-color: #1f1f1f !important; }
-    body.dark-mode .card { background-color: #1f1f1f; color: #f5f5f5; }
-    body.dark-mode footer { background-color: #1f1f1f; color: #f5f5f5; }
-    body.dark-mode .text-muted { color: #bbbbbb !important; }
+
+    footer strong {
+      color: #00d4ff;
+    }
+
+    /* Scroll Animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 3rem; }
+      .hero p { font-size: 1.2rem; }
+      .section-title { font-size: 2rem; }
+      .nav-link { margin: 0 0.5rem; }
+    }
   </style>
 </head>
 <body>
+  <!-- Particles Background -->
+  <div id="particles"></div>
 
   <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" href="#">
-        <img src="Kaltech Studio Digital.png" alt="Logo Kaltech Studio" style="width: 150px; height: 70px;">
+        <img src="Kaltech Studio Digital.png" alt="Logo">
         <span>Kaltech Studio Digital</span>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -76,7 +441,7 @@
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link active" href="#home">Accueil</a></li>
+          <li class="nav-item"><a class="nav-link" href="#home">Accueil</a></li>
           <li class="nav-item"><a class="nav-link" href="#about">À propos</a></li>
           <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
           <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
@@ -88,53 +453,53 @@
 
   <!-- HERO -->
   <section class="hero" id="home">
-    <div class="container">
+    <div class="hero-content">
       <h1>Kaltech Studio Digital</h1>
-      <p>L’innovation au service de vos idées</p>
-      <a href="#contact" class="btn btn-light btn-lg mt-3">Contactez-nous</a>
+      <p>L'innovation au service de vos idées</p>
+      <a href="#contact"><button class="hero-btn">Contactez-nous</button></a>
     </div>
   </section>
 
   <!-- À PROPOS -->
-  <section class="py-5 text-center" id="about">
+  <section id="about">
     <div class="container">
-      <h2 class="section-title">À propos</h2>
-      <p class="lead mx-auto" style="max-width:800px;">
-        Kaltech Studio Digital est une entreprise spécialisée dans la création d’applications et de solutions digitales modernes,
+      <h2 class="section-title fade-in">À propos</h2>
+      <p class="lead mx-auto text-center fade-in" style="max-width:900px;">
+        Kaltech Studio Digital est une entreprise spécialisée dans la création d'applications et de solutions digitales modernes,
         intuitives et performantes. Nous transformons vos idées en expériences numériques concrètes et innovantes.
       </p>
     </div>
   </section>
 
   <!-- SERVICES -->
-  <section class="py-5 bg-light" id="services">
-    <div class="container text-center">
-      <h2 class="section-title">Nos Services</h2>
+  <section id="services">
+    <div class="container">
+      <h2 class="section-title fade-in">Nos Services</h2>
       <div class="row g-4 mt-4">
-        <div class="col-md-3">
-          <div class="card p-4">
-            <i class="bi bi-code-slash display-4 text-info mb-3"></i>
+        <div class="col-md-6 col-lg-3 fade-in">
+          <div class="service-card">
+            <i class="bi bi-code-slash"></i>
             <h5>Développement Web & Mobile</h5>
             <p>Applications performantes et adaptées à vos besoins métiers.</p>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="card p-4">
-            <i class="bi bi-palette display-4 text-info mb-3"></i>
+        <div class="col-md-6 col-lg-3 fade-in">
+          <div class="service-card">
+            <i class="bi bi-palette"></i>
             <h5>Design UX/UI</h5>
             <p>Interfaces modernes et intuitives pour une expérience utilisateur fluide.</p>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="card p-4">
-            <i class="bi bi-tools display-4 text-info mb-3"></i>
+        <div class="col-md-6 col-lg-3 fade-in">
+          <div class="service-card">
+            <i class="bi bi-tools"></i>
             <h5>Maintenance & Support</h5>
             <p>Assistance technique complète pour la sécurité et la performance.</p>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="card p-4">
-            <i class="bi bi-lightbulb display-4 text-info mb-3"></i>
+        <div class="col-md-6 col-lg-3 fade-in">
+          <div class="service-card">
+            <i class="bi bi-lightbulb"></i>
             <h5>Conseil Digital</h5>
             <p>Accompagnement stratégique pour optimiser votre transformation numérique.</p>
           </div>
@@ -144,35 +509,41 @@
   </section>
 
   <!-- PORTFOLIO -->
-  <section class="py-5 text-center" id="portfolio">
+  <section id="portfolio">
     <div class="container">
-      <h2 class="section-title">Nos Réalisations</h2>
-      <p class="text-muted">Bientôt disponibles... 🚀</p>
-      <a href="https://mines.ird.fr/parc_informatique/index.php">
-      <div class="col-md-3">
-          <div class="card p-4">
-            
-           
-            <h5>Parc Informatique IRD</h5>
-           <img src="ird.png" alt=""style="width: 200px; height: 150px;">
-           
-         
-          </div>
+      <h2 class="section-title fade-in">Nos Réalisations</h2>
+      <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4 fade-in">
+          <a href="https://mines.ird.fr/parc_informatique/index.php" style="text-decoration: none; color: inherit;">
+            <div class="portfolio-card text-center">
+              <h5>Parc Informatique IRD</h5>
+              <img src="ird.png" alt="Parc Informatique IRD">
+            </div>
+          </a>
         </div>
-        </a>
+      </div>
+      <p class="text-center mt-4" style="color: rgba(255,255,255,0.6); font-size: 1.1rem;">Plus de projets bientôt disponibles... 🚀</p>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="py-5 bg-light text-center">
+  <section id="contact">
     <div class="container">
-      <h2 class="section-title">Contact</h2>
-      <p><i class="bi bi-envelope-fill"></i> kaltechstudiodigital@gmail.com</p>
-      <p><i class="bi bi-telephone-fill"></i> +221 70 849 25 61</p>
-      <div class="mt-3">
-        <a href="#" class="btn btn-outline-info btn-sm mx-2"><i class="bi bi-facebook"></i></a>
-        <a href="#" class="btn btn-outline-info btn-sm mx-2"><i class="bi bi-instagram"></i></a>
-        <a href="#" class="btn btn-outline-info btn-sm mx-2"><i class="bi bi-linkedin"></i></a>
+      <h2 class="section-title fade-in">Contact</h2>
+      <div class="text-center fade-in">
+        <div class="contact-info">
+          <i class="bi bi-envelope-fill"></i>
+          kaltechstudiodigital@gmail.com
+        </div>
+        <div class="contact-info">
+          <i class="bi bi-telephone-fill"></i>
+          +221 70 849 25 61
+        </div>
+        <div class="mt-4">
+          <a href="#" class="social-btn"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="social-btn"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="social-btn"><i class="bi bi-linkedin"></i></a>
+        </div>
       </div>
     </div>
   </section>
@@ -184,5 +555,75 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Particles Animation
+    function createParticles() {
+      const particles = document.getElementById('particles');
+      for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        const size = Math.random() * 5 + 2;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 20 + 's';
+        particle.style.animationDuration = (Math.random() * 20 + 10) + 's';
+        particles.appendChild(particle);
+      }
+    }
+    createParticles();
+
+    // Navbar Scroll Effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.getElementById('mainNav');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Scroll Animation
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Smooth Scroll & Close Mobile Menu
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Close mobile menu if open
+        const navbarCollapse = document.getElementById('navbarNav');
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse || navbarCollapse.classList.contains('show')) {
+          const collapse = new bootstrap.Collapse(navbarCollapse, {
+            toggle: false
+          });
+          collapse.hide();
+        }
+        
+        // Smooth scroll to target
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          setTimeout(() => {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 300);
+        }
+      });
+    });
+  </script>
 </body>
 </html>
